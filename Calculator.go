@@ -15,7 +15,7 @@ func main() {
 		err    error
 	)
 	for err == nil {
-		text, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+		text, _ := bufio.NewReader(os.Stdin).ReadString('\n') // Считываем строку целиком до '\n'
 		result, err = Calculation(text)
 		if err == nil {
 			fmt.Println(result)
@@ -25,13 +25,13 @@ func main() {
 	}
 }
 func ToRoman(number int) string {
-	cifr := map[int]string{100: "C", 90: "XC", 50: "L", 40: "XL", 10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"}
+	numbers := map[int]string{100: "C", 90: "XC", 50: "L", 40: "XL", 10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"}
 	keys := []int{100, 90, 50, 40, 10, 9, 5, 4, 1}
 	result := ""
 	for number != 0 {
 		for _, key := range keys {
 			if number-key >= 0 {
-				result += cifr[key]
+				result += numbers[key]
 				number -= key
 				break
 			}
@@ -40,8 +40,8 @@ func ToRoman(number int) string {
 	return result
 }
 func ToDecimal(number string) (int, error) {
-	cifr := map[string]int{"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "IX": 9, "X": 10}
-	value, ok := cifr[number]
+	numbers := map[string]int{"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "IX": 9, "X": 10}
+	value, ok := numbers[number]
 	if ok {
 		return value, nil
 	} else {
